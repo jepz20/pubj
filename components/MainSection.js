@@ -1,12 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import StopChooser from './StopChooser'
+import StopTime from './StopTime';
+import Selection from './Selection';
+
 
 const MainSection = () => (
   <section className="main">
-    <StopChooser />
-    <StopChooser />
+    <Selection />
+    <StopTime />
   </section>
-)
+);
 
-export default connect()(MainSection);
+export default MainSection;
