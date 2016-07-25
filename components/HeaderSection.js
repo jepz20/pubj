@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/lib/NavDropdown';
 import MenuItem from 'react-bootstrap/lib/MenuItem';
 
 const HeaderSection = () => (
-  <Navbar inverse>
+  <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
         <a href="#">PubJ</a>
@@ -15,7 +15,7 @@ const HeaderSection = () => (
     </Navbar.Header>
     <Navbar.Collapse>
       <Nav pullRight>
-        <NavItem eventKey={1} href="#">Github</NavItem>
+        <NavItem eventKey={1} href="https://github.com/jepz20/pubj">Github</NavItem>
       </Nav>
     </Navbar.Collapse>
   </Navbar>
