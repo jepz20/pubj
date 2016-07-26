@@ -23,7 +23,7 @@ class StopTime extends React.Component {
     const { trips, updateTrips } = this.props;
     if (trips.length > 0) {
       return (
-        <Table>
+        <Table responsive striped bordered condensed hover>
         <thead>
         <tr>
         <th>Trip ID</th>
