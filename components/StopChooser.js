@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import * as actions  from '../actions';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import FormGroup from 'react-bootstrap/lib/FormGroup';
@@ -9,78 +9,73 @@ import Autocomplete from 'react-autocomplete';
 let styles = {
   item: {
     padding: '2px 6px',
-    cursor: 'default'
+    cursor: 'default',
   },
 
   highlightedItem: {
     color: 'white',
     background: 'hsl(200, 50%, 50%)',
     padding: '2px 6px',
-    cursor: 'default'
+    cursor: 'default',
   },
 
   menu: {
-    border: 'solid 1px #ccc'
-  }
-}
+    border: 'solid 1px #ccc',
+  },
+};
 
-const mapStateToProps = (state) => {
-  return {
-    stops: state.stops
-  }
-}
+const mapStateToProps = state => ({
+  stops: state.stops,
+});
 
 class StopChooser extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value:''};
+    this.state = { value: '' };
     this.handleChange = this.handleChange.bind(this);
     this.handleSelect = this.handleSelect.bind(this);
   }
+
   componentDidMount() {
     const { fetchStops } = this.props;
     fetchStops();
   }
-  handleChange(e, value) {
-    this.setState({ value })
-    const { changeStopTimes } = this.props
-    changeStopTimes(this.props.list_id, e.target.value);
-  }
-  handleSelect(value) {
-    this.setState({ value })
-    const { changeStopTimes } = this.props
-    changeStopTimes(this.props.list_id, value);
-  }
-  render() {
 
-    const { list_id, stops, label } = this.props;
+  handleChange(e, value) {
+    this.setState({ value });
+    const { changeStopTimes } = this.props;
+    changeStopTimes(this.props.listId, e.target.value);
+  }
+
+  handleSelect(value) {
+    this.setState({ value });
+    const { changeStopTimes } = this.props;
+    changeStopTimes(this.props.listId, value);
+  }
+
+  render() {
+    const { listId, stops, label } = this.props;
     const matchStop = (state, value) =>
-      state.stop_name.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      state.stop_name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
     let input;
     return (
-      <FormGroup controlId={list_id}>
+      <FormGroup controlId={listId}>
         <ControlLabel>{label}</ControlLabel>
         {' '}
         <FormControl
-        list={list_id}
-        componentClass="select"
+        list={listId}
         name="browser"
         onChange={this.handleChange}
         ref={node => {
           input = node;
         }}
         >
-        <option value=""></option>
-        {stops.stops.map(stop =>
-          <option key={stop.stop_id} value={stop.stop_id }>
-          {stop.stop_name}
-          </option>
-        )}
         </FormControl>
         <Autocomplete
           value={this.state.value}
-          inputProps={{name: "Stop", id: "stops-autocomplete"}}
+          inputProps={{ name: 'Stop', id: 'stops-autocomplete' }}
           items={stops.stops}
+          className="form-control"
           getItemValue={(item) => item.stop_name}
           shouldItemRender={matchStop}
           onChange={this.handleChange}
@@ -93,9 +88,9 @@ class StopChooser extends React.Component {
           )}
         />
       </FormGroup>
-    )
+    );
   }
 }
 
-StopChooser = connect(mapStateToProps, actions)(StopChooser)
+StopChooser = connect(mapStateToProps, actions)(StopChooser);
 export default StopChooser;
