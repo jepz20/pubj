@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import StopChooser from './StopChooser';
 import Form from 'react-bootstrap/lib/Form';
 import Button from 'react-bootstrap/lib/Button';
+import ButtonGroup from 'react-bootstrap/lib/ButtonGroup';
 import * as actions from '../actions';
 
 const mapStateToProps = (state) => ({
@@ -34,12 +35,22 @@ class Selection extends React.Component {
 
   render() {
     return (
-      <Form inline>
-      <StopChooser label="From" listId="departure"/>
-      {' '}
-      <StopChooser label="To" listId="arrival"/>
-      <Button bsStyle="primary" onClick={this.executeFilter}>Search</Button>
-    </Form>
+      <div>
+        <Form inline>
+          <StopChooser label="From" listId="departure"/>
+          {' '}
+          <StopChooser label="To" listId="arrival"/>
+          <Button bsStyle="primary" onClick={this.executeFilter}>Search</Button>
+        </Form>
+        {/*<ButtonGroup>
+          <Button active>Radio 1
+            <Input ref="input1" type="radio" name="radioButtonSet" value='input1' standalone defaultChecked/>
+          </Button>
+          <Button>Radio 2
+            <Input ref="input2" type="radio" name="radioButtonSet" value='input2' standalone/>
+          </Button>
+        </ButtonGroup>*/}
+      </div>
     );
   }
 }

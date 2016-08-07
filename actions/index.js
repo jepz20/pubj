@@ -2,25 +2,25 @@ import * as api from '../api';
 
 const receiveStops = response => ({
   type: 'RECEIVE_STOPS',
-  response
+  response,
 });
 
 const receiveStopTimes = (response=[]) => ({
   type: 'LOAD_STOP_TIMES',
-  response
+  response,
 });
 
 const updateTrips = (response=[], stopsById={}) => ({
   type: 'UPDATE_TRIPS',
   response,
-  stopsById
+  stopsById,
 });
 
 export const changeStopTimes = (id, info) => ({
   type: 'UPDATE_CHOOSER',
   id,
-  info
-})
+  info,
+});
 
 export const fetchStopFilter = (arrival, departure, stopsById) =>
   api.fetchTrip(arrival, departure)
@@ -36,4 +36,4 @@ export const fetchStops = () =>
 export const fetchStopTimes = () =>
   api.fetchTrip().then(response =>
     receiveStopTimes(response)
-  )
+);

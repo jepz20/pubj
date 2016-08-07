@@ -4,23 +4,18 @@ import * as actions from '../actions';
 import { v4 } from 'node-uuid';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
-const mapStateToProps = (state) => {
-  return {
-    trips: state.trips
-  }
-}
+const mapStateToProps = (state) => ({
+    trips: state.trips,
+  });
 
 class StopTime extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    const { fetchStopTimes } = this.props;
-    // fetchStopTimes();
-  }
+
   render() {
-    const { trips, updateTrips } = this.props;
+    const { trips } = this.props;
     if (trips.length > 0) {
       return (
         <Table responsive striped bordered condensed hover>
@@ -50,11 +45,11 @@ class StopTime extends React.Component {
           )}
           </tbody>
           </Table>
-        )
+      );
     } else {
       return (
         <h1>No Results</h1>
-      )
+      );
     }
   }
 }

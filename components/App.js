@@ -7,6 +7,6 @@ const App = () => (
     <HeaderSection />
     <MainSection />
   </div>
-)
+);
 
-export default App
+export default App;

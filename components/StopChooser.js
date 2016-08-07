@@ -37,8 +37,14 @@ class StopChooser extends React.Component {
   }
 
   componentDidMount() {
+
     const { fetchStops } = this.props;
+    console.log('cdm');
     fetchStops();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('resize');
   }
 
   handleChange(e, value) {
@@ -58,24 +64,20 @@ class StopChooser extends React.Component {
     const matchStop = (state, value) =>
       state.stop_name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
     let input;
+    let screenWidth = typeof window === 'object' ? window.innerWidth : 0;
+    console.log('render?');
+    const wrapperStyle = {};
+
     return (
       <FormGroup controlId={listId}>
         <ControlLabel>{label}</ControlLabel>
         {' '}
-        <FormControl
-        list={listId}
-        name="browser"
-        onChange={this.handleChange}
-        ref={node => {
-          input = node;
-        }}
-        >
-        </FormControl>
         <Autocomplete
           value={this.state.value}
-          inputProps={{ name: 'Stop', id: 'stops-autocomplete' }}
+          inputProps={{ name: 'Stop', id: listId, className: 'form-control' }}
+          wrapperProps={ { className: 'form-group' } }
           items={stops.stops}
-          className="form-control"
+          wrapperStyle={wrapperStyle}
           getItemValue={(item) => item.stop_name}
           shouldItemRender={matchStop}
           onChange={this.handleChange}

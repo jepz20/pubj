@@ -7,14 +7,15 @@ export default function trips(state = [], action) {
     case 'UPDATE_TRIPS':
       let trips = [];
       if (action.response.length > 0) {
-        trips = action.response[0]
+        trips = action.response[0];
       } else {
-        trips = action.response
+        trips = action.response;
       }
 
       trips.forEach(stop => {
-          stop['stop_detail'] = action.stopsById[stop.stop_id];
-      })
+        stop.stop_detail = action.stopsById[stop.stop_id];
+      });
+
       return trips;
     default:
       return state;
