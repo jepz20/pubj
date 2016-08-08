@@ -11,26 +11,27 @@ export const fetchStops = () => fetch('./data/stops.json')
 export const fetchStopTimes = () => fetch('./data/stop_times.json')
 .then(res => res.json());
 
-export const fetchTrip = (arrival='1093', destination='1084') => fetch('./data/stop_times.json')
+export const fetchTrip = (arrival, destination, pickedDay='weekday') =>
+fetch('./data/stop_times.json')
 .then(res => res.json())
 .then(data => {
   let possibleTrips = data.filter(
     strip => strip.parent_station == arrival || strip.parent_station == destination
   );
-  let tripMatch = possibleTrips.reduce((valAnte, valActual, indice) => {
-    let stopIdKey = valActual.parent_station == arrival ? 'arrival_stop' :
+  let tripMatch = possibleTrips.reduce((prev, current, index) => {
+    let stopIdKey = current.parent_station == arrival ? 'arrival_stop' :
     'dest_stop';
-    let stopSequenceKey = valActual.parent_station == arrival ? 'arrival_sequence' :
+    let stopSequenceKey = current.parent_station == arrival ? 'arrival_sequence' :
     'dest_sequence';
 
-    if (!valAnte[valActual.trip_id]) {
-      valAnte[valActual.trip_id] = {};
+    if (!prev[current.trip_id]) {
+      prev[current.trip_id] = {};
     };
 
-    valAnte[valActual.trip_id][stopIdKey] = valActual.stop_id;
-    valAnte[valActual.trip_id][stopSequenceKey] = valActual.stop_sequence;
+    prev[current.trip_id][stopIdKey] = current.stop_id;
+    prev[current.trip_id][stopSequenceKey] = current.stop_sequence;
 
-    return valAnte;
+    return prev;
   }, {});
 
   let fullTrips = [];
@@ -46,12 +47,30 @@ export const fetchTrip = (arrival='1093', destination='1084') => fetch('./data/s
       return;
     };
 
-    fullTrips.push(data.filter(trip =>
-      trip.trip_id == tm &&
-      +trip.stop_sequence >= +tripMatch[tm].arrival_sequence &&
-      +trip.stop_sequence <= +tripMatch[tm].dest_sequence
-    ));
+    fullTrips.push({
+      tripId: tm,
+      stops: data.filter(trip =>
+        trip.trip_id == tm &&
+        +trip.stop_sequence >= +tripMatch[tm].arrival_sequence &&
+        +trip.stop_sequence <= +tripMatch[tm].dest_sequence
+      ),
+    });
   });
-  let count = 0;
-  return fullTrips;
+  if (fullTrips.length === 0) {
+    return [];
+  }
+
+  return fetch('./data/trips.json')
+  .then(res => res.json())
+  .then(data => {
+    let trips = data;
+    let returnTrips = fullTrips.reduce((prev, current, index) => {
+      let tripDetail = trips.filter(t=> t.trip_id === fullTrips[index].tripId)[0];
+      if (tripDetail[pickedDay]) {
+        prev.push(fullTrips[index]);
+      }
+      return prev;
+    }, []);
+    return returnTrips;
+  });
 });

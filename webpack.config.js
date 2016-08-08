@@ -37,6 +37,9 @@ module.exports = {
     new CopyWebpackPlugin([
       { from: 'data', to: 'data' },
     ]),
+    new CopyWebpackPlugin([
+      { from: 'rawData', to: 'rawData' },
+    ]),
     // new webpack.optimize.UglifyJsPlugin({
     //   beautify: false,
     //   comments: false,

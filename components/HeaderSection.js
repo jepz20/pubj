@@ -9,7 +9,7 @@ const HeaderSection = () => (
   <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">PubJ</a>
+        <a href="#">PubJ - Public Transportation</a>
       </Navbar.Brand>
       <Navbar.Toggle />
     </Navbar.Header>

@@ -6,8 +6,9 @@ export default function trips(state = [], action) {
       return action.response[0];
     case 'UPDATE_TRIPS':
       let trips = [];
+      console.log(action.response, 'lol');
       if (action.response.length > 0) {
-        trips = action.response[0];
+        trips = action.response[0].stops;
       } else {
         trips = action.response;
       }

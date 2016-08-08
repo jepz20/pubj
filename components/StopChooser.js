@@ -37,14 +37,8 @@ class StopChooser extends React.Component {
   }
 
   componentDidMount() {
-
     const { fetchStops } = this.props;
-    console.log('cdm');
     fetchStops();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log('resize');
   }
 
   handleChange(e, value) {
@@ -64,8 +58,6 @@ class StopChooser extends React.Component {
     const matchStop = (state, value) =>
       state.stop_name.toLowerCase().indexOf(value.toLowerCase()) !== -1;
     let input;
-    let screenWidth = typeof window === 'object' ? window.innerWidth : 0;
-    console.log('render?');
     const wrapperStyle = {};
 
     return (

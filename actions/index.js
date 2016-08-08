@@ -22,8 +22,8 @@ export const changeStopTimes = (id, info) => ({
   info,
 });
 
-export const fetchStopFilter = (arrival, departure, stopsById) =>
-  api.fetchTrip(arrival, departure)
+export const fetchStopFilter = (arrival, departure, stopsById, pickedDay) =>
+  api.fetchTrip(arrival, departure, pickedDay)
   .then(response =>
     updateTrips(response, stopsById)
   );
