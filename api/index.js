@@ -67,10 +67,13 @@ fetch('./data/stop_times.json')
     let returnTrips = fullTrips.reduce((prev, current, index) => {
       let tripDetail = trips.filter(t=> t.trip_id === fullTrips[index].tripId)[0];
       if (tripDetail[pickedDay]) {
+        fullTrips[index].detail = tripDetail;
         prev.push(fullTrips[index]);
-      }
+      };
+
       return prev;
     }, []);
+
     return returnTrips;
   });
 });

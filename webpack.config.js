@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 
 const webpack = require('webpack');
 const pkg = require('./package.json');
@@ -9,8 +10,7 @@ const PATHS = {
   app: './index.js',
   build: path.join(__dirname, 'dist'),
 };
-console.log(PATHS.build);
-module.exports = {
+config = {
   entry: {
     app: './index.js',
     vendor: Object.keys(pkg.dependencies),
@@ -38,31 +38,8 @@ module.exports = {
       { from: 'data', to: 'data' },
     ]),
     new CopyWebpackPlugin([
-      { from: 'rawData', to: 'rawData' },
+      { from: 'images', to: 'images' },
     ]),
-    // new webpack.optimize.UglifyJsPlugin({
-    //   beautify: false,
-    //   comments: false,
-    //
-    //   compress: {
-    //     sequences: true,
-    //     dead_code: true,
-    //     conditionals: true,
-    //     booleans: true,
-    //     unused: true,
-    //     if_return: true,
-    //     join_vars: true,
-    //     drop_console: true,
-    //   },
-    //
-    //   mangle: {
-    //     except: ['$'],
-    //     screw_ie8 : true,
-    //   },
-    //   output: {
-    //     comments: false,
-    //   },
-    // }),
   ],
   module: {
     loaders: [
@@ -82,3 +59,35 @@ module.exports = {
     ],
   },
 };
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+    beautify: false,
+    comments: false,
+    sourcemap: true,
+    compress: {
+      sequences: true,
+      dead_code: true,
+      conditionals: true,
+      booleans: true,
+      unused: true,
+      if_return: true,
+      join_vars: true,
+      warnings: false,
+    },
+
+    mangle: {
+      except: ['$'],
+      screw_ie8 : true,
+    },
+    output: {
+      comments: false,
+    },
+  }));
+
+  config.plugins.push(new SWPrecacheWebpackPlugin({
+    cacheId: 'pubj',
+    filename: 'service-worker.js',
+  }));
+};
+
+module.exports = config;

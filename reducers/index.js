@@ -1,8 +1,8 @@
 import  { combineReducers } from 'redux';
 import stops from './stops';
-import trips from './trips';
+import trip from './trip';
 
 export default combineReducers({
   stops,
-  trips,
+  trip,
 });

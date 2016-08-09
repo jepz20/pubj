@@ -66,7 +66,10 @@ class StopChooser extends React.Component {
         {' '}
         <Autocomplete
           value={this.state.value}
-          inputProps={{ name: 'Stop', id: listId, className: 'form-control' }}
+          inputProps={{ name: 'Stop',
+            id: listId,
+            className: 'form-control',
+          }}
           wrapperProps={ { className: 'form-group' } }
           items={stops.stops}
           wrapperStyle={wrapperStyle}

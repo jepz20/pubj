@@ -4,8 +4,10 @@ import * as actions from '../actions';
 import { v4 } from 'node-uuid';
 import Table from 'react-bootstrap/lib/Table';
 import Button from 'react-bootstrap/lib/Button';
+import Panel from 'react-bootstrap/lib/Panel';
+
 const mapStateToProps = (state) => ({
-    trips: state.trips,
+    trip: state.trip,
   });
 
 class StopTime extends React.Component {
@@ -15,40 +17,45 @@ class StopTime extends React.Component {
   }
 
   render() {
-    const { trips } = this.props;
-    if (trips.length > 0) {
+    const { trip } = this.props;
+    console.log(trip);
+    if (Object.keys(trip).length === 0) {
+      return <div></div>
+    };
+
+    if (trip.stops) {
+      console.log(trip);
+      const { stops, detail } = trip;
       return (
-        <Table responsive striped bordered condensed hover>
-        <thead>
-        <tr>
-        <th>Trip ID</th>
-        <th>Stop ID</th>
-        <th>Name</th>
-        <th>Arrival</th>
-        <th>Departure</th>
-        <th>Latitud</th>
-        <th>Longitud</th>
-        </tr>
-        </thead>
-        <tbody>
-        {
-          trips.map(st =>
-            <tr key={v4()}>
-            <td>{st.trip_id}</td>
-            <td>{st.stop_id}</td>
-            <td>{st.stop_detail ? st.stop_detail.stop_name : ''}</td>
-            <td>{st.arrival_time}</td>
-            <td>{st.departure_time}</td>
-            <td>{st.stop_detail ? st.stop_detail.stop_lat : ''}</td>
-            <td>{st.stop_detail ? st.stop_detail.stop_lon : ''}</td>
-            </tr>
-          )}
-          </tbody>
-          </Table>
+        <Panel bsStyle="primary" header={`${detail.trip_id} - ${detail.trip_headsign}`}>
+          <Table responsive striped bordered condensed hover>
+          <thead>
+          <tr>
+          <th>Stop Id</th>
+          <th>Name</th>
+          <th>Arrival</th>
+          <th>Departure</th>
+          <th>In Map</th>
+          </tr>
+          </thead>
+          <tbody>
+          {
+            stops.map(st =>
+              <tr key={v4()}>
+              <td>{st.stop_id}</td>
+              <td>{st.stop_detail ? st.stop_detail.stop_name : ''}</td>
+              <td>{st.arrival_time}</td>
+              <td>{st.departure_time}</td>
+              <td><a target="_blank" href={`http://maps.google.com/?q=@${st.stop_detail.stop_lat},${st.stop_detail.stop_lon}`}>View</a></td>
+              </tr>
+            )}
+            </tbody>
+            </Table>
+        </Panel>
       );
-    } else {
+    } else if (trip.error) {
       return (
-        <h1>No Results</h1>
+        <h1>{trip.error}</h1>
       );
     }
   }
