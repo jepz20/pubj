@@ -59,6 +59,7 @@ config = {
     ],
   },
 };
+console.log(config.entry.vendor);
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
     beautify: false,

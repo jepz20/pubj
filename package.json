@@ -4,7 +4,7 @@
   "description": "Public Transportation App",
   "main": "index.js",
   "scripts": {
-    "build": "NODE_ENV=development webpack -p",
+    "build": "NODE_ENV=development webpack -p --progress",
     "dev": "webpack-dev-server --content-base dist/",
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "node-uuid": "^1.4.7",
     "normalize.css": "^4.2.0",
     "papaparse": "^4.1.2",
@@ -23,10 +24,11 @@
     "react-redux": "^4.4.5",
     "redux": "^3.5.2",
     "redux-logger": "^2.6.1",
+    "express": "^4.13.4",
+    "serve-favicon": "^2.3.0",
     "redux-promise": "^0.5.3"
   },
   "devDependencies": {
-    "express": "^4.13.4",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
@@ -37,7 +39,6 @@
     "css-loader": "^0.23.1",
     "file-loader": "^0.9.0",
     "html-webpack-plugin": "^2.22.0",
-    "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "sw-precache-webpack-plugin": "^0.3.1",
     "url-loader": "^0.5.7",
