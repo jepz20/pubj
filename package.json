@@ -26,7 +26,6 @@
     "redux-promise": "^0.5.3"
   },
   "devDependencies": {
-    "express": "^4.14.0",
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-plugin-transform-object-rest-spread": "^6.6.5",
@@ -41,6 +40,7 @@
     "serve-favicon": "^2.3.0",
     "style-loader": "^0.13.1",
     "sw-precache-webpack-plugin": "^0.3.1",
-    "url-loader": "^0.5.7"
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1"
   }
 }
