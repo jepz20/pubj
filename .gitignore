@@ -1,9 +1,7 @@
 node_modules
-bundle.js*
 npm-debug.log
 .DS_Store
 *.pyc
 lib
 venv
 _DS_Store
-dist
