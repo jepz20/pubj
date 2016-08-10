@@ -4,8 +4,8 @@ var
   express = require('express'),
   favicon = require('serve-favicon'),
   path = require('path'),
-  host = process.env.HOST || '127.0.0.1',
-  port = process.env.PORT || 5000,
+  host = process.env.HOST || '0.0.0.0',
+  port = process.env.PORT || 2210,
   root = path.resolve(__dirname);
 
 app = express();
@@ -23,7 +23,7 @@ app.use(express.static(root + '/dist', {
   },
 }));
 app.use(favicon(__dirname + '/images/favicon.ico'));
-server = app.listen(port, host, serverStarted);
+server = app.listen(port, serverStarted);
 
 function serverStarted() {
   console.log('Server started', host, port);
