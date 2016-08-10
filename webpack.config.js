@@ -59,7 +59,6 @@ config = {
     ],
   },
 };
-console.log(config.entry.vendor);
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
     beautify: false,
@@ -90,5 +89,14 @@ if (process.env.NODE_ENV === 'production') {
     filename: 'service-worker.js',
   }));
 };
+
+excludedPackages = [
+  'express',
+  'serve-favicon',
+];
+
+config.entry.vendor = config.entry.vendor.filter(e=>
+  excludedPackages.indexOf(e) < 0
+);
 
 module.exports = config;
