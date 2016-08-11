@@ -6,7 +6,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --progress",
     "dev": "webpack-dev-server --content-base dist/",
-    "dev:sw": "NODE_ENV=development webpack --progress && node server",
+    "dev:node": "NODE_ENV=development webpack --progress && node server",
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

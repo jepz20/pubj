@@ -1,4 +1,4 @@
-# Meetup Planner
+# PUBJ Transportation App
 author@Jose Eduardo Perdomo
 
 Second Proyect for the Senior Web Developer Nanodegree at Udacity
