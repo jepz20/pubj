@@ -28,6 +28,11 @@ config = {
       filename: 'index.html',
       template: 'index-template.ejs',
     }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor', 'manifest'],
     }),
@@ -60,10 +65,11 @@ config = {
   },
 };
 if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
+  }));
+
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    beautify: false,
-    comments: false,
-    sourcemap: true,
     compress: {
       sequences: true,
       dead_code: true,
@@ -75,10 +81,7 @@ if (process.env.NODE_ENV === 'production') {
       warnings: false,
     },
 
-    mangle: {
-      except: ['$'],
-      screw_ie8 : true,
-    },
+    mangle: false,
     output: {
       comments: false,
     },
@@ -88,6 +91,8 @@ if (process.env.NODE_ENV === 'production') {
     cacheId: 'pubj',
     filename: 'service-worker.js',
   }));
+} else {
+  config.devtools = 'evals';
 };
 
 excludedPackages = [

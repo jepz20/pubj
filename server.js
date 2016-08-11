@@ -5,7 +5,7 @@ var
   favicon = require('serve-favicon'),
   path = require('path'),
   host = process.env.HOST || '0.0.0.0',
-  port = process.env.PORT || 2210,
+  port = process.env.PORT || 2222,
   root = path.resolve(__dirname);
 
 app = express();

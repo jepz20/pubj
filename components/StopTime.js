@@ -18,7 +18,6 @@ class StopTime extends React.Component {
 
   render() {
     const { trip } = this.props;
-    console.log(trip);
     if (Object.keys(trip).length === 0) {
       return <div></div>
     };
