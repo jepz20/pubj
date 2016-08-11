@@ -90,6 +90,10 @@ if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new SWPrecacheWebpackPlugin({
     cacheId: 'pubj',
     filename: 'service-worker.js',
+    runtimeCaching: [{
+      urlPattern: /data/,
+      handler: 'networkFirst',
+    }],
   }));
 } else {
   config.devtools = 'evals';
