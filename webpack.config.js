@@ -74,6 +74,7 @@ if (process.env.NODE_ENV === 'production') {
       sequences: true,
       dead_code: true,
       conditionals: true,
+      drop_console: true,
       booleans: true,
       unused: true,
       if_return: true,
@@ -90,10 +91,12 @@ if (process.env.NODE_ENV === 'production') {
   config.plugins.push(new SWPrecacheWebpackPlugin({
     cacheId: 'pubj',
     filename: 'service-worker.js',
-    runtimeCaching: [{
-      urlPattern: /data/,
-      handler: 'networkFirst',
-    }],
+    runtimeCaching: [
+      {
+        urlPattern: /data/,
+        handler: 'networkFirst',
+      },
+    ],
   }));
 } else {
   config.devtools = 'evals';
