@@ -25,12 +25,12 @@ class StopTime extends React.Component {
     };
 
     if (trip.stops) {
-      console.log(trip);
       const { stops, detail } = trip;
       const getDuration = (departure, arrival) => {
         if (!departure || !arrival) {
           return ' -- ';
-        }
+        };
+
         let setDate = t => (
           new Date(
 
@@ -60,7 +60,7 @@ class StopTime extends React.Component {
 
       return (
         <Panel bsStyle="primary" header={`${detail.trip_id} - ${detail.trip_headsign}
-          - Total Duration: ${getDuration(detail.initialTime, detail.endTime)}`}>
+          - Trip Duration: ${getDuration(detail.initialTime, detail.endTime)}`}>
           <Table responsive striped bordered condensed hover>
           <thead>
           <tr>

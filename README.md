@@ -33,7 +33,7 @@ Run this project locally  with webpack(faster reloads no service worker)
    ```
    npm run dev
    ```
-Run this project locally with node (with service workers)
+Run this project locally with node (with service workers - production like build)
 
    ```
    npm run dev:node

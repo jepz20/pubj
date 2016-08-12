@@ -45,6 +45,16 @@ config = {
     new CopyWebpackPlugin([
       { from: 'images', to: 'images' },
     ]),
+    new SWPrecacheWebpackPlugin({
+      cacheId: 'pubj',
+      filename: 'service-worker.js',
+      runtimeCaching: [
+        {
+          urlPattern: /data/,
+          handler: 'networkFirst',
+        },
+      ],
+    }),
   ],
   module: {
     loaders: [
@@ -86,17 +96,6 @@ if (process.env.NODE_ENV === 'production') {
     output: {
       comments: false,
     },
-  }));
-
-  config.plugins.push(new SWPrecacheWebpackPlugin({
-    cacheId: 'pubj',
-    filename: 'service-worker.js',
-    runtimeCaching: [
-      {
-        urlPattern: /data/,
-        handler: 'networkFirst',
-      },
-    ],
   }));
 } else {
   config.devtools = 'evals';
