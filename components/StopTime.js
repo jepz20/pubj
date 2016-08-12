@@ -19,14 +19,48 @@ class StopTime extends React.Component {
   render() {
     const { trip } = this.props;
     if (Object.keys(trip).length === 0) {
-      return <div></div>
+      return (
+          <div></div>
+      );
     };
 
     if (trip.stops) {
       console.log(trip);
       const { stops, detail } = trip;
+      const getDuration = (departure, arrival) => {
+        if (!departure || !arrival) {
+          return ' -- ';
+        }
+        let setDate = t => (
+          new Date(
+
+            //Default date, only used to properly substract dates
+            1985, 10, 22,
+            t.substring(0, 2),
+            t.substring(3, 5),
+            t.substring(6)
+          )
+        );
+
+        const leftPadWithZeros = (str, len) => {
+          str = str.toString();
+          while (str.length < len) {
+            str = '0' + str;
+          };
+
+          return str;
+        };
+
+        let diffMS = Math.abs(setDate(arrival) - setDate(departure));
+        let difM = Math.floor(diffMS / 60 / 1000);
+        let difS = Math.floor(diffMS / 1000) - (difM * 60);
+
+        return `${leftPadWithZeros(difM, 2)}:${leftPadWithZeros(difS, 2)}`;
+      };
+
       return (
-        <Panel bsStyle="primary" header={`${detail.trip_id} - ${detail.trip_headsign}`}>
+        <Panel bsStyle="primary" header={`${detail.trip_id} - ${detail.trip_headsign}
+          - Total Duration: ${getDuration(detail.initialTime, detail.endTime)}`}>
           <Table responsive striped bordered condensed hover>
           <thead>
           <tr>
@@ -34,6 +68,7 @@ class StopTime extends React.Component {
           <th>Name</th>
           <th>Arrival</th>
           <th>Departure</th>
+          <th>Duration</th>
           <th>In Map</th>
           </tr>
           </thead>
@@ -45,6 +80,7 @@ class StopTime extends React.Component {
               <td>{st.stop_detail ? st.stop_detail.stop_name : ''}</td>
               <td>{st.arrival_time}</td>
               <td>{st.departure_time}</td>
+              <td>{getDuration(st.departure_time, st.arrival_time)}</td>
               <td><a target="_blank" href={`http://maps.google.com/?q=@${st.stop_detail.stop_lat},${st.stop_detail.stop_lon}`}>View</a></td>
               </tr>
             )}
