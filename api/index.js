@@ -69,7 +69,9 @@ fetch('./data/stop_times.json')
       if (tripDetail[pickedDay]) {
         fullTrips[index].detail = tripDetail;
         fullTrips[index].detail.initialTime = fullTrips[index].stops[0].arrival_time;
-        fullTrips[index].detail.endTime = fullTrips[index].stops[fullTrips[index].stops.length - 1].arrival_time;
+        fullTrips[index].detail.endTime = fullTrips[index]
+          .stops[fullTrips[index].stops.length - 1]
+          .arrival_time;
         fullTrips[index].stops[fullTrips[index].stops.length - 1].departure_time = null;
         prev.push(fullTrips[index]);
       };

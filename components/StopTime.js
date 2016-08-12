@@ -64,24 +64,31 @@ class StopTime extends React.Component {
           <Table responsive striped bordered condensed hover>
           <thead>
           <tr>
-          <th>Stop Id</th>
-          <th>Name</th>
-          <th>Arrival</th>
-          <th>Departure</th>
-          <th>Duration</th>
-          <th>In Map</th>
+            <th>Stop Id</th>
+            <th>Name</th>
+            <th>Arrival</th>
+            <th>Departure</th>
+            <th>Duration</th>
+            <th>In Map</th>
           </tr>
           </thead>
           <tbody>
           {
             stops.map(st =>
               <tr key={v4()}>
-              <td>{st.stop_id}</td>
-              <td>{st.stop_detail ? st.stop_detail.stop_name : ''}</td>
-              <td>{st.arrival_time}</td>
-              <td>{st.departure_time}</td>
-              <td>{getDuration(st.departure_time, st.arrival_time)}</td>
-              <td><a target="_blank" href={`http://maps.google.com/?q=@${st.stop_detail.stop_lat},${st.stop_detail.stop_lon}`}>View</a></td>
+                <td>{st.stop_id}</td>
+                <td>{st.stop_detail ? st.stop_detail.stop_name : ''}</td>
+                <td>{st.arrival_time}</td>
+                <td>{st.departure_time}</td>
+                <td>{getDuration(st.departure_time, st.arrival_time)}</td>
+                <td>
+                  <a
+                    target="_blank"
+                    href={`http://maps.google.com/?q=@${st.stop_detail.stop_lat},
+                    ${st.stop_detail.stop_lon}`}>
+                  View
+                  </a>
+                </td>
               </tr>
             )}
             </tbody>

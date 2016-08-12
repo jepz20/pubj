@@ -1,14 +1,14 @@
 # PUBJ Transportation App
 author@Jose Eduardo Perdomo
 
-Second Proyect for the Senior Web Developer Nanodegree at Udacity
+Second Project for the Senior Web Developer Nanodegree at Udacity
 
 PubJ Show You the route to go from a departure stop to an arrival stop,
 using GTFS information of Argentina
 
 PubJ is serve using a simple express server, and uses React and redux as frameworks.
 
-Pubj is a progressive app, which can serve the content offline.
+PubJ is a progressive app, which can serve the content offline.
 
 ###Live Version
 Live version of the page: https://pubj-jepz.herokuapp.com
@@ -36,7 +36,7 @@ Run this project locally  with webpack(faster reloads no service worker)
 Run this project locally with node (with service workers - production like build)
 
    ```
-   npm run dev:node
+   npm run serve
    ```
 Run this pr
 

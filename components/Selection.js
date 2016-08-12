@@ -23,7 +23,7 @@ class Selection extends React.Component {
   executeFilter() {
     const { arrival, departure, stopsById, stops } = this.props.stops;
     const { fetchStopFilter } = this.props;
-    const { pickedDay } = this.state
+    const { pickedDay } = this.state;
     if (!arrival || !departure) return;
     let arrivalDetail = stops.filter(stop => stop.stop_name === arrival);
     let departureDetail = stops.filter(stop => stop.stop_name === departure);

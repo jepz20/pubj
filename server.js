@@ -1,12 +1,11 @@
-
-var
-  app, server,
-  express = require('express'),
-  favicon = require('serve-favicon'),
-  path = require('path'),
-  host = process.env.HOST || '0.0.0.0',
-  port = process.env.PORT || 2222,
-  root = path.resolve(__dirname);
+var server;
+var app;
+var express = require('express');
+var favicon = require('serve-favicon');
+var path = require('path');
+var host = process.env.HOST || '0.0.0.0';
+var port = process.env.PORT || 2222;
+var root = path.resolve(__dirname);
 
 app = express();
 app.use(function (req, res, next) {
