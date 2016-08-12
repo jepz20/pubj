@@ -60,7 +60,7 @@ class StopTime extends React.Component {
 
       return (
         <Panel bsStyle="primary" header={`${detail.trip_id} - ${detail.trip_headsign}
-          - Trip Duration: ${getDuration(detail.initialTime, detail.endTime)}`}>
+          - Trip Duration: ${getDuration(detail.initialTime, detail.endTime)} Minutes`}>
           <Table responsive striped bordered condensed hover>
           <thead>
           <tr>
